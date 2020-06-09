@@ -26,55 +26,94 @@ from unitCell import UnitCell
 from customexceptions import *
 from board import Board
 from pointer import Pointer
+import keydicts as kd
+import usefulconstants as uc
 
 class TicTacToeBoard(Board):
    """A board to play tic-tac-toe on"""
-   def __init__(self, width=3, height=3, cell_content=lambda x, y: None, border='line', cell_class=UnitCell):
+   def __init__(self, state, width=3, height=3, cell_content=lambda x, y: None, border='line', cell_class=UnitCell):
       super().__init__(board_width=width, board_height=height, cell_width=1, cell_height=1, cell_content=cell_content, border=border, cell_class=cell_class)
+
+      self.state = state
+      self.game_status = uc.ONGOING
 
       self.turn = 'X'
       self.pointer = Pointer(self, x=1, y=1)
+
+      self.instructions = """
+      Navigate around the board with the arrow keys or wasd
+      Make your move by pressing the space key
+      Restart the game with r
+      Quit the game with q
+      WARNING - do not press the enter key"""
    
    def on_key_press(self, key):
-      move_keys = {
-         'w': self.pointer.up,
-         'up': self.pointer.up,
-         'a': self.pointer.left,
-         'left': self.pointer.left,
-         's': self.pointer.down,
-         'down': self.pointer.down,
-         'd': self.pointer.right,
-         'right': self.pointer.right
-      }
+      # Define relevant key dicts and lists for reference
+      move_keys = kd.BASIC_MOVE_KEYS(self)
+      quit_keys = ['q']
+      # move_keys = {
+      #    'w': self.pointer.up,
+      #    'up': self.pointer.up,
+      #    'a': self.pointer.left,
+      #    'left': self.pointer.left,
+      #    's': self.pointer.down,
+      #    'down': self.pointer.down,
+      #    'd': self.pointer.right,
+      #    'right': self.pointer.right
+      # }
       try:
          # Alphanumeric keys have key.char
-         if key.char in ['q']:
+         if key.char in quit_keys:
             # Stop program
-            self.running = False
+            self.game_status = uc.QUIT
             return False
          elif key.char in ['r']:
             # Restart game
             for row in self.cells:
                for cell in row:
                   cell.value = ' '
+            self.state.reset()
          elif key.char in move_keys:
             move_keys[key.char]()
          else:
-            pass
+            # Unknown key press
+            self.footer = self.instructions
       except AttributeError:
          if key.name in move_keys:
             move_keys[key.name]()
          elif key.name == 'space':
-            current = self.pointer.cell
-            if current.value == ' ':
-               current.value = self.turn
-               # Change player turn
-               if self.turn == 'O':
-                  self.turn = 'X'
-               else:
-                  self.turn = 'O'
+            # Attempt to place token in cell
+            # Encode the move to send to the state
+            token = self.state.next_piece
+            move_str = self.pointer.xystr() + ' ' + token
+
+            res = self.state.move(move_str)
+            if res == uc.OK:
+               # Move was good so we can update board
+               self.pointer.cell.value = token
+               self.footer = None
+
+               # Did that reach a conclusive game state
+               ev = self.state.evaluate()
+               if not ev.status == uc.ONGOING:
+                  # Game has ended
+                  self.game_status = ev.status
+                  # Attach relevant footer
+                  self.game_status = ev.status
+                  if ev.status == uc.WON:
+                     self.footer = f'Player {ev.player + 1} wins'
+                  elif ev.status == uc.DRAWN:
+                     self.footer = f'Draw'
+                  else:
+                     self.footer = f'Unexpected evaluation status {ev.status}'
+            elif res == uc.ILLEGAL:
+               self.footer = f'{move_str} is not a legal move'
+            else:
+               self.footer = f'Unrecognised response code from tttstate: {res}'
+            
          else:
-            self.running = False
+            # Stop the program
+            self.game_status = uc.QUIT
             return False
       
 
@@ -82,12 +121,13 @@ if __name__ == '__main__':
    """Play tic-tac-toe"""
    from pynput import keyboard
    import time
-   B = TicTacToeBoard()
-   B.running = True
+   from tttstate import TTTState
+   State = TTTState()
+   B = TicTacToeBoard(state=State)
    listener =  keyboard.Listener(on_press=B.on_key_press)
    listener.start()
 
-   while B.running:
+   B.header = 'Nought and Crosses\n'
+   while B.game_status == uc.ONGOING:
       time.sleep(1/60)
       B.draw()
-   print('Game Over')

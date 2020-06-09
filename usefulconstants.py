@@ -29,3 +29,4 @@ ILLEGAL = 210
 
 # 3. Misc.
 NA = -1 # As opposed to a numbered player
+QUIT = 900

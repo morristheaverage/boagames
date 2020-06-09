@@ -41,11 +41,11 @@ class TTTState(State):
             assert self.grid[j][i] == None
             self.grid[j][i] = token
         except:
-            return 'ILLEGAL'
+            return uc.ILLEGAL
         finally:
             self.turn = next(self._turn_iter)
             self.next_piece = self._tokens[self.turn]
-            return 'OK'
+            return uc.OK
     
     def evaluate(self):
         """Has either side won?"""
@@ -59,7 +59,7 @@ class TTTState(State):
         # Second check columns
         for x in range(self.size):
             col_start = self.grid[0][x]
-            won = bool(col_start) and all(self.grid[y][x] == col_start for y in range(self.grid))
+            won = bool(col_start) and all(self.grid[y][x] == col_start for y in range(self.size))
             if won:
                 return State.Evaluation(status = uc.WON, player = self._tokens.index(col_start))
         
@@ -83,3 +83,12 @@ class TTTState(State):
         
         # If the game is not ongoing it is a draw
         return State.Evaluation(status = uc.DRAWN, player = uc.NA)
+    
+    def reset(self):    
+        """Reset to default board"""
+        self.grid = [[None for _ in range(self.size)] for _ in range(self.size)]
+        self._turn_iter = cycle([0, 1])
+        self.turn = next(self._turn_iter)
+        self._tokens = ('X', 'O')
+        self.next_piece = self._tokens[self.turn]
+        self._X_won, self._Y_won = False, False

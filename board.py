@@ -246,6 +246,10 @@ class Board:
         self._drawn = 0
         self._buffer_length = 0
 
+        # Header and Footer attributes are strings that can be used
+        self.header = None
+        self.footer = None
+
     @property
     def width(self):
         return self._width
@@ -325,10 +329,14 @@ class Board:
         self._drawn = 0
 
     def refresh(self):
+        if self.header:
+            print(self.header)
         for row in self.rows:
             for c in row:
                 print(c, end='')
             print()
+        if self.footer:
+            print(self.footer)
 
     def update_frame_buffer(self):
         new_frame = []

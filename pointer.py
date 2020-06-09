@@ -56,3 +56,7 @@ class Pointer:
     
     def left(self, steps=1):
         self.x -= steps
+    
+    def xystr(self) -> str:
+        """String representation of self"""
+        return f'{self.x} {self.y}'
