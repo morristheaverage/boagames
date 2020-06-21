@@ -33,7 +33,7 @@ class TTTState(State):
 
         self._grid = grid
     
-    def move(self, move):
+    def move(self, move, check=True):
         """Given a move 'i j' as a string"""
         coords = move.split()
         i, j, token = int(coords[0]), int(coords[1]), coords[2]
@@ -43,9 +43,20 @@ class TTTState(State):
         except:
             return uc.ILLEGAL
         finally:
-            self.turn = next(self._turn_iter)
-            self.next_piece = self._tokens[self.turn]
+            if not check:
+                self.turn = next(self._turn_iter)
+                self.next_piece = self._tokens[self.turn]
             return uc.OK
+    
+    def generate_legal_moves(self):
+        """Return a list of legal 'i j' moves"""
+        legal_moves = []
+        for j, row in enumerate(self.grid):
+            for i, cell in enumerate(row):
+                if cell == None:
+                    legal_moves.append(f'{i} {j}')
+
+        return legal_moves
     
     def evaluate(self):
         """Has either side won?"""

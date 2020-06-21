@@ -5,21 +5,25 @@ class State:
         self.num_players = num_players
         raise NotImplementedError
 
-    def move(self, move: str):
+    def move(self, move: str, check: bool):
         """ if not legal move:
                 return 'ILLEGAL'
             else:
                 return 'OK'
         """
         raise NotImplementedError
-    
+
+    def generate_legal_moves(self) -> list:
+        """Return a list of all possible moves"""
+
+        raise NotImplementedError   
     # Code inspired by https://stackoverflow.com/questions/652276/is-it-possible-to-create-anonymous-objects-in-python
     class Evaluation(object):
         def __new__(cls, **attrs):
             instance = object.__new__(cls)
             instance.__dict__ = attrs
             return instance
-    
+     
     def evaluate(self):
         """Return tuple of normalised scores for each
         player
