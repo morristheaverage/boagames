@@ -1,4 +1,4 @@
-from customexceptions import *
+from boagames.misc.customexceptions import *
 
 class Cell:
     """Default cell class"""

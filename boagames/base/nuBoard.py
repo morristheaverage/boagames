@@ -1,6 +1,7 @@
-from cell import Cell
-from board import Board
-from customexceptions import *
+from boagames.base.cell import Cell
+from boagames.base.board import Board
+from boagames.misc.customexceptions import *
+
 from itertools import count
 import os
 

@@ -1,6 +1,6 @@
-from cell import Cell
-from customexceptions import *
-import style
+from boagames.base.cell import Cell
+from boagames.misc.customexceptions import *
+from boagames.misc import style
 
 class UnitCell(Cell):
     """1x1 cell that is easier to use"""

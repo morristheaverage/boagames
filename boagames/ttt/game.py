@@ -22,12 +22,13 @@ and what to draw to screen. The board coordinates the contents of cells
 according to the game state.
 """
 
-from unitCell import UnitCell
-from customexceptions import *
-from board import Board
-from pointer import Pointer
-import keydicts as kd
-import usefulconstants as uc
+from boagames.base.unitCell import UnitCell
+from boagames.base.board import Board
+from boagames.base.pointer import Pointer
+
+from boagames.misc.customexceptions import *
+from boagames.misc import keydicts as kd
+from boagames.misc import usefulconstants as uc
 
 class TicTacToeBoard(Board):
    """A board to play tic-tac-toe on"""
@@ -116,12 +117,13 @@ class TicTacToeBoard(Board):
             self.game_status = uc.QUIT
             return False
       
-
-if __name__ == '__main__':
+def play():
    """Play tic-tac-toe"""
    from pynput import keyboard
    import time
-   from tttstate import TTTState
+   
+   from boagames.ttt.tttstate import TTTState
+   
    State = TTTState()
    B = TicTacToeBoard(state=State)
    listener =  keyboard.Listener(on_press=B.on_key_press)
@@ -131,3 +133,6 @@ if __name__ == '__main__':
    while B.game_status == uc.ONGOING:
       time.sleep(1/60)
       B.draw()
+
+if __name__ == '__main__':
+   play()

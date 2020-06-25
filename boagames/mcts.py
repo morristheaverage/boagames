@@ -1,7 +1,7 @@
 """File to include a base node class to build a tree and other helper functions"""
 
 import random
-import usefulconstants as uc
+import boagames.misc.usefulconstants as uc
 import numpy as np
 import copy
 

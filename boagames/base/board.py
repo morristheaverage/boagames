@@ -1,6 +1,6 @@
-from customexceptions import DimensionError, ContentError
-import os
+from boagames.misc.customexceptions import DimensionError, ContentError
 
+import os
 import time
 
 class Board:

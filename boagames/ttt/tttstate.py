@@ -1,6 +1,6 @@
-from state import State
+from boagames.base.state import State
 from itertools import cycle
-import usefulconstants as uc
+import boagames.misc.usefulconstants as uc
 
 class TTTState(State):
     """The state of a tic-tac-toe game"""
