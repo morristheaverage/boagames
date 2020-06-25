@@ -3,6 +3,7 @@
 import random
 import usefulconstants as uc
 import numpy as np
+import copy
 
 class Node:
     """The base node class"""
@@ -37,12 +38,13 @@ class Node:
         # If this node has never been used before it has self.num == 0
         if self.num == 0:
             # So we can finish one random playthrough and that is enough
-            playthrough = self.state.deepcopy
+            playthrough = copy.deepcopy(self.state)
             ev = playthrough.evaluate()
             # Create a copy of the state and play moves randomly until game ends
             while ev.status == uc.ONGOING:
                 move = random.choice(playthrough.generate_legal_moves())
                 playthrough.move(move)
+                ev = playthrough.evaluate()
             # Now that game has ended get result
             self.num += 1
             if ev.status == uc.WON:
@@ -50,7 +52,7 @@ class Node:
                     self.score += self.WIN
                 else:
                     self.score += self.LOSS
-                return tuple(self.LOSS if i != ev.player else self.WIN for i in self.state.num_players)
+                return tuple(self.LOSS if i != ev.player else self.WIN for i in range(self.state.num_players))
             elif ev.status == uc.DRAWN:
                 self.score += self.DRAW
                 return tuple(1/self.state.num_players for _ in range(self.state.num_players))
@@ -59,7 +61,7 @@ class Node:
         elif len(self.unexpanded_children) > 0:
             # Select a fresh random child, u, from unexpanded_children
             u_move = self.unexpanded_children.pop()
-            u_state = self.state.deepcopy()
+            u_state = copy.deepcopy(self.state)
             assert u_state.move(u_move) == uc.OK
 
             # Now add a child to the tree using this new state

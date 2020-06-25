@@ -19,6 +19,8 @@ class TTTState(State):
             # if moves were passed they must be filled in
             if moves:
                 pass
+        
+        self.num_players = 2
 
     @property
     def grid(self):
@@ -33,7 +35,7 @@ class TTTState(State):
 
         self._grid = grid
     
-    def move(self, move, check=True):
+    def move(self, move, check=False):
         """Given a move 'i j' as a string"""
         coords = move.split()
         i, j, token = int(coords[0]), int(coords[1]), coords[2]
@@ -54,7 +56,7 @@ class TTTState(State):
         for j, row in enumerate(self.grid):
             for i, cell in enumerate(row):
                 if cell == None:
-                    legal_moves.append(f'{i} {j}')
+                    legal_moves.append(f'{i} {j} {self.next_piece}')
 
         return legal_moves
     
