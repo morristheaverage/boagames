@@ -26,7 +26,7 @@ from boagames.base.unitCell import UnitCell
 from boagames.base.board import Board
 from boagames.base.pointer import Pointer
 
-from boagames.misc.customexceptions import *
+# from boagames.misc.customexceptions import *
 from boagames.misc import keydicts as kd
 from boagames.misc import usefulconstants as uc
 
@@ -122,7 +122,7 @@ def play():
    from pynput import keyboard
    import time
    
-   from boagames.games.ttt.tttstate import TTTState
+   from boagames.games.ttt.state import TTTState
    
    State = TTTState()
    B = TicTacToeBoard(state=State)
