@@ -1,5 +1,5 @@
 from boagames.base.cell import Cell
-from boagames.misc.customexceptions import *
+from boagames.misc.customexceptions import UnitValueError
 from boagames.misc import style
 
 class UnitCell(Cell):

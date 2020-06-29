@@ -1,6 +1,6 @@
 from boagames.base.cell import Cell
 from boagames.base.board import Board
-from boagames.misc.customexceptions import *
+from boagames.misc.customexceptions import ContentError
 
 from itertools import count
 import os

@@ -1,4 +1,4 @@
-from boagames.misc.customexceptions import *
+from boagames.misc.customexceptions import ContentError, DimensionError
 from boagames.misc import style
 
 class Cell:
