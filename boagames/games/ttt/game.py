@@ -122,7 +122,7 @@ def play():
    from pynput import keyboard
    import time
    
-   from boagames.ttt.tttstate import TTTState
+   from boagames.games.ttt.tttstate import TTTState
    
    State = TTTState()
    B = TicTacToeBoard(state=State)

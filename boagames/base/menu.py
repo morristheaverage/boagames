@@ -55,10 +55,11 @@ class Menu(NUBoard):
         nukwargs['col_widths'] = [self.margin, self.main_width, self.margin]
         
         # Set contents
-        self.buttons_dicts = kwargs.get(
+        self.button_dicts = kwargs.get(
             'buttons',
             [{'name': None, 'action': None} for _ in range(self.main_height)]
             )
+        # The cell_contents function is now determined by the list of buttons
         nukwargs
 
         # Set style data
