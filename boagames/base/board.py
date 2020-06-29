@@ -317,9 +317,14 @@ class Board:
     # Base render methods
     def draw(self):
         """Draws each row of cells in turn"""
+        # Call update_frame_buffer()
         self.update_frame_buffer()
+        # New frame is now stored in self.rows
         self.clear()
+        # Screen has now been cleared
         self.refresh()
+        # New frame has been drawn along
+        # with header and footer if any exist
     
         
 

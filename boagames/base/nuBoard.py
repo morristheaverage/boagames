@@ -7,11 +7,7 @@ import os
 
 class NUBoard(Board):
     """Board with non-uniform cell shapes"""
-    def __init__(self, #board_width=1, board_height=1,
-                 #row_heights=[1], col_widths=[1],
-                 #cell_content=lambda x, y: None,
-                 #border_style='none', 
-                 **kwargs):
+    def __init__(self, **kwargs):
         """Fills out the initial board"""
         self.width = kwargs.get('board_width', 1)
         self.height = kwargs.get('board_height', 1)

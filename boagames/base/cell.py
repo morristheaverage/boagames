@@ -1,8 +1,8 @@
 from boagames.misc.customexceptions import *
+from boagames.misc import style
 
 class Cell:
     """Default cell class"""
-    
     
     def __init__(self, **kwargs):
         # Assign data to the rows
@@ -12,6 +12,8 @@ class Cell:
 
         self.width = kwargs.get('width', 1)
         self.height = kwargs.get('height', 1)
+
+        self.selected = kwargs.get('selected', False)
 
         # Becomes true once data has been set
         self._full = False
@@ -58,7 +60,11 @@ class Cell:
 
     @property
     def rows(self):
-        return self._rows
+        # Allow for highlighting
+        if self.selected:
+            return [[style.HIGHLIGHT] + [row] + [style.RESET] for row in self._rows]
+        else:
+            return self._rows
 
     @rows.setter
     def rows(self, rows):

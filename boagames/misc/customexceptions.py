@@ -11,3 +11,9 @@ class UnitValueError(Exception):
 the unitCell class
 """
     pass
+
+class ActionError(Exception):
+    """Raised when an undefined action is assigned
+    to a button
+    """
+    pass

@@ -39,28 +39,19 @@ class UnitCell(Cell):
 
     @value.setter
     def value(self, value):
-        try:
-            # Only allow values that can be printed
-            # with a single char - redo this
-            if len(str(value)) >= 1:
-                self._value = value
-                if hasattr(self, 'selected') and self.selected:
-                    self.rows = [[style.HIGHLIGHT, value, style.RESET]]
-                else:
-                    self.rows = [[value]]
-            else:
-                raise UnitValueError
-        except AttributeError as error:
-            print(dir(error))
-            raise ContentError(error)
-    
+        # Only allow values that can be printed
+        # with a single char - redo this
+        if len(str(value)) >= 1:
+            self._value = value
+        else:
+            raise UnitValueError
+
+
     @property
-    def selected(self):
-        return self._selected
-    
-    @selected.setter
-    def selected(self, selected):
-        self._selected = selected
-        # Check value to refresh self.rows accordingly
-        self.value = self.value
+    def rows(self):
+        # Allow for highlighting
+        if self.selected:
+            return [[style.HIGHLIGHT, self.value, style.RESET]]
+        else:
+            return [self.value]
     
