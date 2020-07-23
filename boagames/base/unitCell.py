@@ -53,5 +53,10 @@ class UnitCell(Cell):
         if self.selected:
             return [[style.HIGHLIGHT, self.value, style.RESET]]
         else:
-            return [self.value]
+            return [[self.value]]
+    
+    @rows.setter
+    def rows(self, rows):
+        # Prevents attributeerror: can't set attribute
+        pass
     

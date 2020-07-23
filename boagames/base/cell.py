@@ -13,6 +13,7 @@ class Cell:
         self.width = kwargs.get('width', 1)
         self.height = kwargs.get('height', 1)
 
+        # Can effect highlighting
         self.selected = kwargs.get('selected', False)
 
         # Becomes true once data has been set

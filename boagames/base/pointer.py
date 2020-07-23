@@ -25,7 +25,7 @@ class Pointer:
         self._x = x % self.board.width
 
         # Finally select new cell
-        self.cell = self.board.cells[self.y][x]
+        self.cell = self.board.cells[self.y][self.x]
         self.cell.selected = True
     
     @property
@@ -41,7 +41,7 @@ class Pointer:
         self._y = y % self.board.width
 
         # Finally select new cell
-        self.cell = self.board.cells[y][self.x]
+        self.cell = self.board.cells[self.y][self.x]
         self.cell.selected = True
     
     def up(self, steps=1):

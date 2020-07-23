@@ -230,15 +230,13 @@ class Board:
         self.cell_content = cell_content
 
         if cell_class == None:
-            from cell import Cell
-        else:
-            Cell = cell_class
+            from cell import Cell as cell_class
 
         # cell_content(x, y) will provide data for the specified cell
         self.cells = [[None for _ in range(self.width)] for _ in range(self.height)]
         for y in range(self.height):
             for x in range(self.width):
-                self.cells[y][x] = Cell(x=x, y=y,
+                self.cells[y][x] = cell_class(x=x, y=y,
                                         width=cell_width, height=cell_height,
                                         rows = cell_content(x, y))
 
