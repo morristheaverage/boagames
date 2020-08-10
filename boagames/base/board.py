@@ -108,36 +108,36 @@ class Board:
                 'none': ''
                 },
             'corner_1': {
-                'line': u'\u2510',
-                'block': u'\u2596',
-                'ascii': '\\',
+                'line': u'\u2518',
+                'block': u'\u2598',
+                'ascii': '/',
                 'space': ' ',
                 'none': ''
                 },
             'corner_2': {
+                'line': u'\u2514',
+                'block': u'\u2590',
+                'ascii': '\\',
+                'space': ' ',
+                'none': ''
+                },
+            'corner_3': {
+                'line': u'\u2534',
+                'block': u'\u2580',
+                'ascii': '-',
+                'space': ' ',
+                'none': ''
+                },
+            'corner_4': {
                 'line': u'\u250C',
                 'block': u'\u2597',
                 'ascii': '/',
                 'space': ' ',
                 'none': ''
                 },
-            'corner_3': {
-                'line': u'\u252C',
-                'block': u'\u2584',
-                'ascii': '-',
-                'space': ' ',
-                'none': ''
-                },
-            'corner_4': {
-                'line': u'\u2514',
-                'block': u'\u259D',
-                'ascii': '\\',
-                'space': ' ',
-                'none': ''
-                },
             'corner_5': {
                 'line': u'\u253C',
-                'block': u'\u259E',
+                'block': u'\u259A',
                 'ascii': '+',
                 'space': ' ',
                 'none': ''
@@ -151,15 +151,15 @@ class Board:
                 },
             'corner_7': {
                 'line': u'\u253C',
-                'block': u'\u259F',
+                'block': u'\u259C',
                 'ascii': '+',
                 'space': ' ',
                 'none': ''
                 },
             'corner_8': {
-                'line': u'\u2518',
-                'block': u'\u2598',
-                'ascii': '/',
+                'line': u'\u2510',
+                'block': u'\u2596',
+                'ascii': '\\',
                 'space': ' ',
                 'none': ''
                 },
@@ -172,35 +172,35 @@ class Board:
                 },
             'corner_10': {
                 'line': u'\u253C',
-                'block': u'\u259A',
+                'block': u'\u259E',
                 'ascii': '+',
                 'space': ' ',
                 'none': ''
                 },
             'corner_11': {
                 'line': u'\u253C',
-                'block': u'\u2599',
+                'block': u'\u259B',
                 'ascii': '+',
                 'space': ' ',
                 'none': ''
                 },
             'corner_12': {
-                'line': u'\u2534',
-                'block': u'\u2580',
+                'line': u'\u252C',
+                'block': u'\u2584',
                 'ascii': '-',
                 'space': ' ',
                 'none': ''
                 },
             'corner_13': {
                 'line': u'\u253C',
-                'block': u'\u259B',
+                'block': u'\u2599',
                 'ascii': '+',
                 'space': ' ',
                 'none': ''
                 },
             'corner_14': {
                 'line': u'\u253C',
-                'block': u'\u259C',
+                'block': u'\u259F',
                 'ascii': '+',
                 'space': ' ',
                 'none': ''

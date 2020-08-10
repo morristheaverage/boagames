@@ -133,7 +133,6 @@ def play():
    while B.game_status == uc.ONGOING:
       time.sleep(1/60)
       B.draw()
-      print(B.pointer.xystr())
 
 if __name__ == '__main__':
    play()

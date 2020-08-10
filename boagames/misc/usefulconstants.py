@@ -30,3 +30,8 @@ ILLEGAL = 210
 # 3. Misc.
 NA = -1 # As opposed to a numbered player
 QUIT = 900
+
+# 4. Menu Constants
+MENU_DEFAULT_BUTTON_WIDTH = 24
+MENU_DEFAULT_BUTTON_HEIGHT = 1
+MENU_DEFAULT_NUM_BUTTONS = 10

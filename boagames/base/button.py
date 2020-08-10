@@ -1,4 +1,4 @@
-from boagames.base.menu import Menu
+import boagames.misc.usefulconstants as uc
 from boagames.misc.customexceptions import ActionError
 
 class Button:
@@ -8,15 +8,17 @@ class Button:
     they are pressed. This class will provide a builtin
     set of actions that can be accessed by a dictionary.
     """
-    ACTION_DICT = {
-        None: none_action,
-        'play': play
-    }
+    
 
     def __init__(self, **kwargs):
+
+        self.ACTION_DICT = {
+            None: self.none_action,
+            'play': self.play
+        }
         # Set dimensions
-        self.width = kwargs.get('width', Menu.DEFAULT_BUTTON_WIDTH)
-        self.height = kwargs.get('height', Menu.DEFAULT_BUTTON_HEIGHT)
+        self.width = kwargs.get('width', uc.MENU_DEFAULT_BUTTON_WIDTH)
+        self.height = kwargs.get('height', uc.MENU_DEFAULT_BUTTON_HEIGHT)
 
         # Set name
         self.name = kwargs.get('name')
